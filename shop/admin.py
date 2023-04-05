@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Product, Contact, Order, OrderUpdate
+from .models import Product, Contact, Orders, OrderUpdate
 # from django.contrib.auth.models import
 from django.contrib.auth.admin import UserAdmin
 
@@ -13,7 +13,7 @@ class OrderUpdateAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-class OrderAdmin(admin.ModelAdmin):
+class OrdersAdmin(admin.ModelAdmin):
     list_display = ('order_id', 'userId', 'name', 'email', 'timestamp')
     list_filter = ['timestamp']
 
@@ -46,7 +46,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Contact, ContactAdmin)
-admin.site.register(Order, OrderAdmin)
+admin.site.register(Orders, OrdersAdmin)
 admin.site.register(OrderUpdate, OrderUpdateAdmin)
 
 admin.site.site_header = "The TSEC Food Adda"
