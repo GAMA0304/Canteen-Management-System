@@ -235,7 +235,7 @@ input[type="text"]{
 
           <!-- Slide 1 -->
           <div class="carousel-item active">
-            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-1.jpg' %}" alt=""></div>
+            <div class="carousel-background"><img src="/media/shop/images/team3.png" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Welcome to <span>TSEC FOOD ADDA</span></h2>
@@ -246,7 +246,7 @@ input[type="text"]{
 
           <!-- Slide 2 -->
           <div class="carousel-item">
-            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-2.jpg' %}" alt=""></div>
+            <div class="carousel-background"><img src="/media/shop/images/H.png" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown mb-0">Our Motto</h2>
@@ -258,7 +258,7 @@ input[type="text"]{
 
           <!-- Slide 3 -->
           <div class="carousel-item">
-            <div class="carousel-background"><img src="{% static 'shop/assets/img/slide/slide-3.jpg' %}" alt=""></div>
+            <div class="carousel-background"><img src="/media/shop/images/K.png" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h3 class="animate__animated animate__fadeInDown mb-0">COOMING SOON</h3>
@@ -520,6 +520,48 @@ function updatePopover(cart) {
 
   <!-- Template Main JS File -->
   <script src="{% static 'shop/assets/js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.1.1/dist/index.min.js"></script>
+  <script>
+    const popup = document.querySelector('.chat-popup');
+const chatBtn = document.querySelector('.chat-btn');
+const submitBtn = document.querySelector('.submit');
+const chatArea = document.querySelector('.chat-area');
+const inputElm = document.querySelector('input');
+const emojiBtn = document.querySelector('#emoji-btn');
+const picker = new EmojiButton();
 
+
+// Emoji selection  
+window.addEventListener('DOMContentLoaded', () => {
+
+    picker.on('emoji', emoji => {
+      document.querySelector('input').value += emoji;
+    });
+  
+    emojiBtn.addEventListener('click', () => {
+      picker.togglePicker(emojiBtn);
+    });
+  });        
+
+//   chat button toggler 
+
+chatBtn.addEventListener('click', ()=>{
+    popup.classList.toggle('show');
+})
+
+// send msg 
+submitBtn.addEventListener('click', ()=>{
+    let userInput = inputElm.value;
+
+    let temp = `<div class="out-msg">
+    <span class="my-msg">${userInput}</span>
+    <img src="img/me.jpg" class="avatar">
+    </div>`;
+
+    chatArea.insertAdjacentHTML("beforeend", temp);
+    inputElm.value = '';
+
+})
+  </script>
 
 {% endblock %}
