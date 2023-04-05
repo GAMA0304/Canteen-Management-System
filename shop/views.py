@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 
 # I have created this file - Darshan
 # from django.http import HttpResponse
-from .models import Product, Contact, Orders, OrderUpdate
+from .models import Product, Contact, Order, OrderUpdate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from math import ceil
@@ -55,7 +55,7 @@ def tracker(request):
         user = authenticate(username=name, password=password)
         if user is not None:
             try:
-                order = Orders.objects.filter(order_id=orderId, email=email)
+                order = Order.objects.filter(order_id=orderId, email=email)
                 if len(order) > 0:
                     update = OrderUpdate.objects.filter(order_id=orderId)
                     updates = []
@@ -75,7 +75,7 @@ def tracker(request):
 def orderView(request):
     if request.user.is_authenticated:
         current_user = request.user
-        orderHistory = Orders.objects.filter(userId=current_user.id)
+        orderHistory = Order.objects.filter(userId=current_user.id)
         if len(orderHistory) == 0:
             messages.info(request, "You have not ordered.")
             return render(request, 'shop/orderView.html')
@@ -120,7 +120,7 @@ def checkout(request):
         state = request.POST.get('state', '')
         zip_code = request.POST.get('zip_code', '')
         phone = request.POST.get('phone', '')
-        order = Orders(items_json=items_json, userId=user_id, name=name, email=email, address=address, city=city, state=state, zip_code=zip_code, phone=phone, amount=amount)
+        order = Order(items_json=items_json, userId=user_id, name=name, email=email, address=address, city=city, state=state, zip_code=zip_code, phone=phone, amount=amount)
         order.save()
         update = OrderUpdate(order_id=order.order_id, update_desc="The Order has been Placed")
         update.save()
