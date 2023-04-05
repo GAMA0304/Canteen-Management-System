@@ -55,7 +55,7 @@ def tracker(request):
         user = authenticate(username=name, password=password)
         if user is not None:
             try:
-                order = Order.objects.filter(order_id=orderId, email=email)
+                order = Orders.objects.filter(order_id=orderId, email=email)
                 if len(order) > 0:
                     update = OrderUpdate.objects.filter(order_id=orderId)
                     updates = []
